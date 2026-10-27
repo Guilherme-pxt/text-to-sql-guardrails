@@ -1,0 +1,12 @@
+[project]
+name = "sqlguard"
+version = "0.1.0"
+description = "Text-to-SQL with guardrails: the LLM writes the SQL; deterministic guards and a System One model (Jev) decide whether it runs, needs confirmation, or is refused."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Guilherme Lucena Peixoto" }]
+requires-python = ">=3.12"
+dependencies = ["numpy"]
+
+[project.scripts]
+sqlguard = "sqlguard.cli:main"

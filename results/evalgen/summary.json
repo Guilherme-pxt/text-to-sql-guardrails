@@ -1,0 +1,130 @@
+{
+  "evalgen_checkout": "eval-dataset-generator",
+  "summaries": {
+    "L1_guards": {
+      "items": 124,
+      "valid_json_rate": 1.0,
+      "action_accuracy": 0.8387,
+      "det_score": 0.7984,
+      "det_pass_rate": 0.7823,
+      "items_with_unsupported_numbers": 14,
+      "refusals": 0,
+      "judge_mean_1to5": null,
+      "judge_norm": null,
+      "judge_failures": null,
+      "combined": null,
+      "judge_det_agreement": null,
+      "mean_latency_s": 4.3094,
+      "by_expected_action": {
+        "answer": {
+          "n": 54,
+          "det_score": 0.8148,
+          "combined": null
+        },
+        "tool_call": {
+          "n": 20,
+          "det_score": 0.7,
+          "combined": null
+        },
+        "decline": {
+          "n": 50,
+          "det_score": 0.82,
+          "combined": null
+        }
+      }
+    },
+    "L2_jev": {
+      "items": 124,
+      "valid_json_rate": 1.0,
+      "action_accuracy": 0.9032,
+      "det_score": 0.879,
+      "det_pass_rate": 0.8629,
+      "items_with_unsupported_numbers": 7,
+      "refusals": 0,
+      "judge_mean_1to5": null,
+      "judge_norm": null,
+      "judge_failures": null,
+      "combined": null,
+      "judge_det_agreement": null,
+      "mean_latency_s": 3.1994,
+      "by_expected_action": {
+        "answer": {
+          "n": 54,
+          "det_score": 0.7778,
+          "combined": null
+        },
+        "tool_call": {
+          "n": 20,
+          "det_score": 0.95,
+          "combined": null
+        },
+        "decline": {
+          "n": 50,
+          "det_score": 0.96,
+          "combined": null
+        }
+      }
+    },
+    "L2_llm": {
+      "items": 124,
+      "valid_json_rate": 1.0,
+      "action_accuracy": 0.7903,
+      "det_score": 0.7702,
+      "det_pass_rate": 0.7661,
+      "items_with_unsupported_numbers": 3,
+      "refusals": 0,
+      "judge_mean_1to5": null,
+      "judge_norm": null,
+      "judge_failures": null,
+      "combined": null,
+      "judge_det_agreement": null,
+      "mean_latency_s": 4.7225,
+      "by_expected_action": {
+        "answer": {
+          "n": 54,
+          "det_score": 0.6389,
+          "combined": null
+        },
+        "tool_call": {
+          "n": 20,
+          "det_score": 0.7,
+          "combined": null
+        },
+        "decline": {
+          "n": 50,
+          "det_score": 0.94,
+          "combined": null
+        }
+      }
+    }
+  },
+  "gates": [
+    {
+      "baseline": "L1_guards",
+      "candidate": "L2_jev",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "delta": 0.0806,
+      "delta_ci95": [
+        0.0242,
+        0.1371
+      ],
+      "reasons": []
+    },
+    {
+      "baseline": "L1_guards",
+      "candidate": "L2_llm",
+      "verdict": "FAIL",
+      "exit_code": 1,
+      "delta": -0.0282,
+      "delta_ci95": [
+        -0.1169,
+        0.0605
+      ],
+      "reasons": [
+        "cluster 'answerable' (n=54) dropped by 0.176 (limit 0.15)",
+        "16 items newly failing (limit 3)"
+      ]
+    }
+  ]
+}

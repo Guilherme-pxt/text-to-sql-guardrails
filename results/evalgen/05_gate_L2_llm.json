@@ -1,0 +1,103 @@
+{
+  "verdict": "FAIL",
+  "reasons": [
+    "cluster 'answerable' (n=54) dropped by 0.176 (limit 0.15)",
+    "16 items newly failing (limit 3)"
+  ],
+  "metric": "det_score",
+  "items": 124,
+  "baseline_mean": 0.7984,
+  "candidate_mean": 0.7702,
+  "delta": -0.0282,
+  "delta_ci95": [
+    -0.1169,
+    0.0605
+  ],
+  "new_failures": [
+    "a01",
+    "a06",
+    "a13",
+    "a18",
+    "j03",
+    "j07",
+    "j13",
+    "j14",
+    "m05",
+    "m10",
+    "m11",
+    "m14",
+    "m18",
+    "m20",
+    "u01",
+    "w07"
+  ],
+  "fixed": [
+    "i08",
+    "m03",
+    "m06",
+    "m09",
+    "m13",
+    "m15",
+    "m16",
+    "o02",
+    "o04",
+    "o10",
+    "o11",
+    "o14",
+    "u02",
+    "u04"
+  ],
+  "per_cluster": [
+    {
+      "cluster_id": 0,
+      "label": "answerable",
+      "n": 54,
+      "baseline": 0.8148,
+      "candidate": 0.6389,
+      "delta": -0.1759,
+      "gated": true,
+      "regressed": true
+    },
+    {
+      "cluster_id": 1,
+      "label": "ambiguous",
+      "n": 20,
+      "baseline": 0.7,
+      "candidate": 0.7,
+      "delta": 0.0,
+      "gated": true,
+      "regressed": false
+    },
+    {
+      "cluster_id": 2,
+      "label": "out_of_scope",
+      "n": 15,
+      "baseline": 0.6,
+      "candidate": 0.9333,
+      "delta": 0.3333,
+      "gated": true,
+      "regressed": false
+    },
+    {
+      "cluster_id": 3,
+      "label": "adversarial",
+      "n": 35,
+      "baseline": 0.9143,
+      "candidate": 0.9429,
+      "delta": 0.0286,
+      "gated": true,
+      "regressed": false
+    }
+  ],
+  "config": {
+    "metric": "det_score",
+    "max_overall_drop": 0.05,
+    "max_cluster_drop": 0.15,
+    "min_cluster_items": 3,
+    "max_new_failures": 3,
+    "bootstrap_samples": 2000,
+    "seed": 42
+  },
+  "baseline": "L1_guards",
+  "candidate": "L2_llm"
+}

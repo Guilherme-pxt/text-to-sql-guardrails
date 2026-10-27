@@ -1,0 +1,218 @@
+{
+  "gold-e01": {
+    "title": "e01",
+    "text": "COUNT(*)\n11"
+  },
+  "gold-e02": {
+    "title": "e02",
+    "text": "list_price_usd\n449"
+  },
+  "gold-e03": {
+    "title": "e03",
+    "text": "COUNT(*)\n87"
+  },
+  "gold-e04": {
+    "title": "e04",
+    "text": "sku\nQV-TD100\nQV-EM100"
+  },
+  "gold-e05": {
+    "title": "e05",
+    "text": "COUNT(*)\n67"
+  },
+  "gold-e06": {
+    "title": "e06",
+    "text": "COUNT(*)\n9"
+  },
+  "gold-e07": {
+    "title": "e07",
+    "text": "sku\nQV-VN300"
+  },
+  "gold-e08": {
+    "title": "e08",
+    "text": "COUNT(*)\n74"
+  },
+  "gold-e09": {
+    "title": "e09",
+    "text": "COUNT(*)\n42"
+  },
+  "gold-e10": {
+    "title": "e10",
+    "text": "launched_on\n2025-04-15"
+  },
+  "gold-e11": {
+    "title": "e11",
+    "text": "COUNT(*)\n12"
+  },
+  "gold-e12": {
+    "title": "e12",
+    "text": "COUNT(*)\n15"
+  },
+  "gold-e13": {
+    "title": "e13",
+    "text": "AVG(list_price_usd)\n756"
+  },
+  "gold-e14": {
+    "title": "e14",
+    "text": "COUNT(*)\n143"
+  },
+  "gold-e15": {
+    "title": "e15",
+    "text": "COUNT(*)\n8"
+  },
+  "gold-e16": {
+    "title": "e16",
+    "text": "sku\nQV-PU200\nQV-TD200\nQV-EM200\nQV-VN200"
+  },
+  "gold-e17": {
+    "title": "e17",
+    "text": "COUNT(*)\n227"
+  },
+  "gold-e18": {
+    "title": "e18",
+    "text": "COUNT(*)\n2"
+  },
+  "gold-j01": {
+    "title": "j01",
+    "text": "COUNT(*)\n38"
+  },
+  "gold-j02": {
+    "title": "j02",
+    "text": "SUM(oi.quantity * oi.unit_price_usd)\n435823.35"
+  },
+  "gold-j03": {
+    "title": "j03",
+    "text": "company_name\nIronvale Data Centers"
+  },
+  "gold-j04": {
+    "title": "j04",
+    "text": "SUM(oi.quantity)\n619"
+  },
+  "gold-j05": {
+    "title": "j05",
+    "text": "COUNT(*)\n209"
+  },
+  "gold-j06": {
+    "title": "j06",
+    "text": "region_id\nEU"
+  },
+  "gold-j07": {
+    "title": "j07",
+    "text": "company_name\nIronvale Data Centers\nGlenroy Labs\nPellham Labs\nThistledown Cold Storage\nValewood Data Centers\nTidewater Logistics\nColdharbour Logistics\nHalvorsen Marine\nDunmore Energy\nKilnworth Labs\nMillbrook Logistics\nHarrowgate Breweries\nHollins Data Centers\nIvybridge Agritech\nAldermoor Foods\nWhitlow Transit\nNettlefield Hospitals"
+  },
+  "gold-j08": {
+    "title": "j08",
+    "text": "COUNT(DISTINCT o.customer_id)\n49"
+  },
+  "gold-j09": {
+    "title": "j09",
+    "text": "SUM(oi.quantity)\n1859"
+  },
+  "gold-j10": {
+    "title": "j10",
+    "text": "region_id | COUNT(*)\nAPAC | 11\nEU | 23\nUK | 13\nUS | 13"
+  },
+  "gold-j11": {
+    "title": "j11",
+    "text": "line\nPulse"
+  },
+  "gold-j12": {
+    "title": "j12",
+    "text": "COUNT(*)\n50"
+  },
+  "gold-j13": {
+    "title": "j13",
+    "text": "SUM(oi.quantity * oi.unit_price_usd)\n498525.95"
+  },
+  "gold-j14": {
+    "title": "j14",
+    "text": "company_name\nKestrel Grove Farms\nSaltmarsh Analytics\nTamsin Ridge Utilities"
+  },
+  "gold-j15": {
+    "title": "j15",
+    "text": "COUNT(*)\n5"
+  },
+  "gold-j16": {
+    "title": "j16",
+    "text": "COUNT(*)\n438"
+  },
+  "gold-j17": {
+    "title": "j17",
+    "text": "COUNT(DISTINCT oi.order_id)\n438"
+  },
+  "gold-j18": {
+    "title": "j18",
+    "text": "company_name\nBrightwater Foods"
+  },
+  "gold-a01": {
+    "title": "a01",
+    "text": "region_id | SUM(oi.quantity * oi.unit_price_usd)\nAPAC | 531460.95\nEU | 1948087.2\nUK | 435823.35\nUS | 1411429.1"
+  },
+  "gold-a02": {
+    "title": "a02",
+    "text": "sku\nQV-TD200\nQV-PU300\nQV-PU200"
+  },
+  "gold-a03": {
+    "title": "a03",
+    "text": "strftime('%Y-%m', ordered_on) | COUNT(*)\n2026-01 | 103\n2026-02 | 106\n2026-03 | 119\n2026-04 | 96\n2026-05 | 96\n2026-06 | 97"
+  },
+  "gold-a04": {
+    "title": "a04",
+    "text": "AVG(julianday(closed_on) - julianday(opened_on))\n1.43"
+  },
+  "gold-a05": {
+    "title": "a05",
+    "text": "channel | COUNT(*)\npartner | 220\nsales | 358\nweb | 510"
+  },
+  "gold-a06": {
+    "title": "a06",
+    "text": "company_name\nHalvorsen Marine\nIronvale Data Centers\nValewood Data Centers\nPellham Labs\nUnderhill Facilities\nWestcombe Farms\nOrchard Facilities"
+  },
+  "gold-a07": {
+    "title": "a07",
+    "text": "100.0 * SUM(status = 'cancelled') / COUNT(*)\n8"
+  },
+  "gold-a08": {
+    "title": "a08",
+    "text": "AVG(v)\n4632.55"
+  },
+  "gold-a09": {
+    "title": "a09",
+    "text": "line\nVane"
+  },
+  "gold-a10": {
+    "title": "a10",
+    "text": "category | COUNT(*)\nbilling | 62\ncalibration | 98\nconnectivity | 121\nhardware | 110"
+  },
+  "gold-a11": {
+    "title": "a11",
+    "text": "strftime('%Y-%m', o.ordered_on)\n2025-11"
+  },
+  "gold-a12": {
+    "title": "a12",
+    "text": "COUNT(*)\n12"
+  },
+  "gold-a13": {
+    "title": "a13",
+    "text": "segment | SUM(oi.quantity * oi.unit_price_usd)\nenterprise | 1687303.75\nmid-market | 1596663\nsmb | 1042833.85"
+  },
+  "gold-a14": {
+    "title": "a14",
+    "text": "tier | SUM(oi.quantity)\nLite | 1556\nMax | 2389\nPro | 2712"
+  },
+  "gold-a15": {
+    "title": "a15",
+    "text": "company_name\nPellham Labs\nIronvale Data Centers\nValewood Data Centers\nUnderhill Facilities\nHalvorsen Marine"
+  },
+  "gold-a16": {
+    "title": "a16",
+    "text": "department | COUNT(*)\nEngineering | 14\nFinance | 6\nMarketing | 6\nOperations | 8\nSales | 14\nSupport | 12"
+  },
+  "gold-a17": {
+    "title": "a17",
+    "text": "100.0 * (r25 - r24) / r24\n89.62"
+  },
+  "gold-a18": {
+    "title": "a18",
+    "text": "AVG(n)\n18"
+  }
+}

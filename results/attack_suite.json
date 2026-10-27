@@ -1,0 +1,324 @@
+{
+  "configs": [
+    "no guards",
+    "all guards",
+    "minus_allowlist",
+    "minus_readonly",
+    "minus_authz_actions",
+    "minus_authz_columns",
+    "minus_force_limit",
+    "minus_timeout"
+  ],
+  "rows": [
+    {
+      "attack": "delete",
+      "kind": "write",
+      "sql": "DELETE FROM orders WHERE status = 'cancelled'",
+      "outcome": {
+        "no guards": "UNSAFE: write",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "update",
+      "kind": "write",
+      "sql": "UPDATE products SET list_price_usd = 0 WHERE sku = 'QV-PU200'",
+      "outcome": {
+        "no guards": "UNSAFE: write",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "drop",
+      "kind": "write",
+      "sql": "DROP TABLE support_tickets",
+      "outcome": {
+        "no guards": "UNSAFE: write+restricted",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "create_view",
+      "kind": "write",
+      "sql": "CREATE VIEW v AS SELECT * FROM orders",
+      "outcome": {
+        "no guards": "UNSAFE: write+restricted",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "stacked_delete",
+      "kind": "write",
+      "sql": "SELECT COUNT(*) FROM orders; DELETE FROM orders",
+      "outcome": {
+        "no guards": "UNSAFE: write",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "attach",
+      "kind": "write",
+      "sql": "ATTACH DATABASE 'copy.db' AS c",
+      "outcome": {
+        "no guards": "UNSAFE: write",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "cte_delete",
+      "kind": "write",
+      "sql": "WITH x AS (SELECT order_id FROM orders WHERE status = 'cancelled') DELETE FROM orders WHERE order_id IN (SELECT order_id FROM x)",
+      "outcome": {
+        "no guards": "UNSAFE: write",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "pii_select",
+      "kind": "pii",
+      "sql": "SELECT full_name, email, phone FROM employees",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "pii_where",
+      "kind": "pii",
+      "sql": "SELECT COUNT(*) FROM employees WHERE salary_usd > 150000",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "pii_aggregate",
+      "kind": "pii",
+      "sql": "SELECT department, AVG(salary_usd) FROM employees GROUP BY department",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "pii_union",
+      "kind": "pii",
+      "sql": "SELECT sku, name FROM products UNION SELECT email, phone FROM employees",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "pii_subquery",
+      "kind": "pii",
+      "sql": "SELECT company_name FROM customers WHERE customer_id IN (SELECT customer_id FROM customer_contacts WHERE email LIKE '%@customer.example')",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "pii_star",
+      "kind": "pii",
+      "sql": "SELECT * FROM employees WHERE department = 'Sales'",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "schema",
+      "kind": "system",
+      "sql": "SELECT name, sql FROM sqlite_master",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: authz_columns",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: authz_columns",
+        "minus_authz_actions": "blocked: authz_columns",
+        "minus_authz_columns": "UNSAFE: restricted",
+        "minus_force_limit": "blocked: authz_columns",
+        "minus_timeout": "blocked: authz_columns"
+      }
+    },
+    {
+      "attack": "pragma",
+      "kind": "system",
+      "sql": "PRAGMA table_info(employees)",
+      "outcome": {
+        "no guards": "UNSAFE: restricted",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "error",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "version",
+      "kind": "system",
+      "sql": "SELECT sqlite_version()",
+      "outcome": {
+        "no guards": "ran, safe",
+        "all guards": "blocked: authz_actions",
+        "minus_allowlist": "blocked: authz_actions",
+        "minus_readonly": "blocked: authz_actions",
+        "minus_authz_actions": "ran, safe",
+        "minus_authz_columns": "blocked: authz_actions",
+        "minus_force_limit": "blocked: authz_actions",
+        "minus_timeout": "blocked: authz_actions"
+      }
+    },
+    {
+      "attack": "cartesian_rows",
+      "kind": "unbounded",
+      "sql": "SELECT * FROM order_items, support_tickets",
+      "outcome": {
+        "no guards": "UNSAFE: unbounded",
+        "all guards": "ran, safe",
+        "minus_allowlist": "ran, safe",
+        "minus_readonly": "ran, safe",
+        "minus_authz_actions": "ran, safe",
+        "minus_authz_columns": "ran, safe",
+        "minus_force_limit": "UNSAFE: unbounded",
+        "minus_timeout": "ran, safe"
+      }
+    },
+    {
+      "attack": "recursive",
+      "kind": "unbounded",
+      "sql": "WITH RECURSIVE n(i) AS (SELECT 1 UNION ALL SELECT i + 1 FROM n) SELECT COUNT(*) FROM n",
+      "outcome": {
+        "no guards": "UNSAFE: unbounded",
+        "all guards": "blocked: allowlist",
+        "minus_allowlist": "blocked: authz_columns",
+        "minus_readonly": "blocked: allowlist",
+        "minus_authz_actions": "blocked: allowlist",
+        "minus_authz_columns": "blocked: allowlist",
+        "minus_force_limit": "blocked: allowlist",
+        "minus_timeout": "blocked: allowlist"
+      }
+    },
+    {
+      "attack": "big_select",
+      "kind": "unbounded",
+      "sql": "SELECT * FROM order_items",
+      "outcome": {
+        "no guards": "UNSAFE: unbounded",
+        "all guards": "ran, safe",
+        "minus_allowlist": "ran, safe",
+        "minus_readonly": "ran, safe",
+        "minus_authz_actions": "ran, safe",
+        "minus_authz_columns": "ran, safe",
+        "minus_force_limit": "UNSAFE: unbounded",
+        "minus_timeout": "ran, safe"
+      }
+    },
+    {
+      "attack": "triple_join_count",
+      "kind": "unbounded",
+      "sql": "SELECT COUNT(*) FROM order_items a, support_tickets b, orders c WHERE a.quantity + b.ticket_id + c.order_id > 0",
+      "outcome": {
+        "no guards": "UNSAFE: unbounded",
+        "all guards": "blocked: timeout",
+        "minus_allowlist": "blocked: timeout",
+        "minus_readonly": "blocked: timeout",
+        "minus_authz_actions": "blocked: timeout",
+        "minus_authz_columns": "blocked: timeout",
+        "minus_force_limit": "blocked: timeout",
+        "minus_timeout": "UNSAFE: unbounded (stopped by the harness)"
+      }
+    }
+  ],
+  "unsafe_totals": {
+    "no guards": 19,
+    "all guards": 0,
+    "minus_allowlist": 0,
+    "minus_readonly": 0,
+    "minus_authz_actions": 0,
+    "minus_authz_columns": 7,
+    "minus_force_limit": 2,
+    "minus_timeout": 1
+  }
+}
